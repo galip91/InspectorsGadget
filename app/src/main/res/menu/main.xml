@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/take_picture"
+        android:title="Take a picture" />
+    <item android:id="@+id/record_video"
+        android:title="Record a video" />
+    <item android:id="@+id/find_un_1"
+        android:title="Find UN Number 14 28" />
+    <item android:id="@+id/find_un_2"
+        android:title="Find UN Number 31 63" />
+    <item android:id="@+id/find_un_3"
+        android:title="Find UN Number 17 13" />
+</menu>
