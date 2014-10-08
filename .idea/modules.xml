@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/InspectorsGadget.iml" filepath="$PROJECT_DIR$/InspectorsGadget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IG (Official).iml" filepath="$PROJECT_DIR$/IG (Official).iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/libs/tess-two/tess-two.iml" filepath="$PROJECT_DIR$/app/libs/tess-two/tess-two.iml" />
     </modules>

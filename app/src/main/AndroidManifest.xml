@@ -33,8 +33,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.eloptico.MainActivity" />
         </activity>
+        <activity
+            android:name=".LiveCardMenuActivity"
+            android:theme="@style/MenuTheme" />
 
-
+        <activity
+            android:name=".ContainersActivity"
+            android:label="@string/title_activity_containers" >
+        </activity>
     </application>
 
 </manifest>
+

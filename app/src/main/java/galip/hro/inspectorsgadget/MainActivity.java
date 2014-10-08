@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 
 import com.google.android.glass.app.Card;
 import com.google.android.glass.content.Intents;
+import com.google.android.glass.timeline.LiveCard;
 import com.google.android.glass.touchpad.Gesture;
 import com.google.android.glass.touchpad.GestureDetector;
 import com.google.android.glass.view.WindowUtils;
@@ -36,6 +37,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.LinkedList;
 
 //import com.google.android.glass.widget.CardBuilder;
 
@@ -263,15 +265,16 @@ public class MainActivity extends Activity {
         startActivityForResult(intent, ACTION_VIDEO_CAPTURE);
     }
 
-    public void findDevelopers(String platform){
-        Intent resultsIntent = new Intent(this, ResultsActivity.class);
-        resultsIntent.putExtra(ResultsActivity.UNNumber, platform);
-        startActivity(resultsIntent);
-    }
-
     public void findCode(String code){
         Intent resultsIntent = new Intent(this, ResultsActivity.class);
         resultsIntent.putExtra(ResultsActivity.UNNumber, code);
+
+        startActivity(resultsIntent);
+    }
+
+    public void  findMissingContainers ()
+    {
+        Intent resultsIntent = new Intent(this, ContainersActivity.class);
 
         startActivity(resultsIntent);
     }
@@ -282,9 +285,7 @@ public class MainActivity extends Activity {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;
 
-
         String _path = picturePath;
-
         Bitmap bitmap = BitmapFactory.decodeFile(_path, options);
 
         try {
@@ -391,6 +392,9 @@ public class MainActivity extends Activity {
                 case R.id.find_un_3:
                     findCode("1713");
                     break;
+                case R.id.find_missing_containers:
+                    findMissingContainers();
+                    break;
             }
             return true;
         }
@@ -488,4 +492,6 @@ public class MainActivity extends Activity {
         }
         return false;
     }
+
+
 }
