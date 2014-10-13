@@ -166,10 +166,10 @@ public class ContainersActivity extends Activity {
         listContainersShip.add("OOLU6162330");
 
         //This ones are the missing containers
-        listContainersShip.add("TTNU8003196");
-        listContainersShip.add("CRLU1624907");
-        listContainersShip.add("HLXU8789181");
-        listContainersShip.add("GESU9459802");
+//        listContainersShip.add("TTNU8003196");
+//        listContainersShip.add("CRLU1624907");
+//        listContainersShip.add("HLXU8789181");
+//        listContainersShip.add("GESU9459802");
     }
 
     @Override

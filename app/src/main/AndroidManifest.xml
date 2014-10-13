@@ -3,7 +3,6 @@
     package="galip.hro.inspectorsgadget" >
 
     <uses-permission android:name="com.google.android.glass.permission.DEVELOPMENT" />
-    <uses-permission android:name="com.google.android.glass.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application

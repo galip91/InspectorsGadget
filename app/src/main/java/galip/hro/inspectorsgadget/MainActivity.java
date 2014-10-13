@@ -401,6 +401,14 @@ public class MainActivity extends Activity {
         return super.onMenuItemSelected(featureId, item);
     }
 
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main, menu);
+//
+//
+//        return true;
+//
+//    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -493,5 +501,13 @@ public class MainActivity extends Activity {
         return false;
     }
 
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //menu.clear();
+        for(int n = 0; n < 10; n++) {
+            //Menu.add(int, int, int, java.lang.CharSequence)()
+            menu.add(Menu.NONE, n, Menu.NONE, "Name " + n);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
 }
