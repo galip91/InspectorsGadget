@@ -2,12 +2,21 @@
 <merger version="2" >
 
     <dataSet config="main" >
+<<<<<<< HEAD
         <source path="C:\Users\Gebruiker\AndroidStudioProjects\InspectorsGadget\app\libs\tess-two\res" />
         <source path="C:\Users\Gebruiker\AndroidStudioProjects\InspectorsGadget\app\libs\tess-two\build\generated\res\rs\debug" />
         <source path="C:\Users\Gebruiker\AndroidStudioProjects\InspectorsGadget\app\libs\tess-two\build\generated\res\generated\debug" />
     </dataSet>
     <dataSet config="debug" >
         <source path="C:\Users\Gebruiker\AndroidStudioProjects\InspectorsGadget\app\libs\tess-two\src\debug\res" />
+=======
+        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\res" />
+        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\build\generated\res\rs\debug" />
+        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\build\generated\res\generated\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\src\debug\res" />
+>>>>>>> 0ed1af5d14919c59936db2f4eaad66295cc91aef
     </dataSet>
 
 </merger>

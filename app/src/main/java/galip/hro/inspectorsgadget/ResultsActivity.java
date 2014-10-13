@@ -2,6 +2,7 @@ package galip.hro.inspectorsgadget;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.google.android.glass.app.Card;
+import com.google.android.glass.media.Sounds;
 import com.google.android.glass.touchpad.Gesture;
 import com.google.android.glass.view.WindowUtils;
 import com.google.android.glass.widget.CardBuilder;
@@ -21,6 +23,7 @@ import com.google.android.glass.widget.CardScrollView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -34,10 +37,8 @@ import java.util.List;
  */
 public class ResultsActivity extends Activity {
     public static final String UNNumber = "1234";
-    public static final String UNDescription = "description";
     public HashMap UNMap = new HashMap();
     DBHelper database = new DBHelper(this);
-
 
     private String mPlatform="Android";
 
@@ -86,11 +87,12 @@ public class ResultsActivity extends Activity {
         mCardScroller.setAdapter(new DeveloperAdapter(mCards));
 
         // Handle the TAP event.
-        mCardScroller.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        mCardScroller.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                openOptionsMenu();
+                // Plays disallowed sound to indicate that TAP actions are not supported.
+                AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                am.playSoundEffect(Sounds.DISALLOWED);
             }
         });
 
@@ -98,14 +100,14 @@ public class ResultsActivity extends Activity {
         setContentView(mCardScroller);
     }
 
-    @Override
-    public boolean onCreatePanelMenu(int featureId, Menu menu){
-        if (featureId == WindowUtils.FEATURE_VOICE_COMMANDS || featureId ==  Window.FEATURE_OPTIONS_PANEL) {
-            getMenuInflater().inflate(R.menu.developer, menu);
-            return true;
-        }
-        return super.onCreatePanelMenu(featureId, menu);
-    }
+    //@Override
+//    public boolean onCreatePanelMenu(int featureId, Menu menu){
+//        if (featureId == WindowUtils.FEATURE_VOICE_COMMANDS || featureId ==  Window.FEATURE_OPTIONS_PANEL) {
+//            getMenuInflater().inflate(R.menu.developer, menu);
+//            return true;
+//        }
+//        return super.onCreatePanelMenu(featureId, menu);
+//    }
 
     @Override
     protected void onResume() {
@@ -142,8 +144,24 @@ public class ResultsActivity extends Activity {
         text2 += database.getData(code);
         card2.setText(text2);
 
+//        Card card3 = new Card(this);
+//        String text3 = "";
+//        if (listContainersMissing.isEmpty()) {
+//            text3 = "No missing containers";
+//        }
+//        else {
+//            text3 = "Missing containers: \n";
+//
+//            for (String container : listContainersMissing) {
+//                text3 += container + "\n";
+//            }
+//        }
+//
+//        card3.setText(text3);
+
         mCards.add(card1);
         mCards.add(card2);
+        //mCards.add(card3);
 
         mCardScroller.setSelection(0);
     }

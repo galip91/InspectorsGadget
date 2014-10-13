@@ -8,5 +8,7 @@
     <string name="title_activity_code">codeActivity</string>
     <string name="action_settings">Settings</string>
     <string name="action_stop">Stop</string>
+    <string name="title_activity_container">Containers</string>
+    <string name="title_activity_containers">ContainersActivity</string>
 
 </resources>
