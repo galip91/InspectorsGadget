@@ -2,21 +2,12 @@
 <merger version="2" >
 
     <dataSet config="debug" >
-<<<<<<< HEAD
-        <source path="C:\Users\Gebruiker\AndroidStudioProjects\InspectorsGadget\app\libs\tess-two\build\intermediates\bundles\debug\res" />
+        <source path="C:\Users\Gebruiker\Documents\InspectorsGadget(new)\app\libs\tess-two\build\intermediates\bundles\debug\res" />
     </dataSet>
     <dataSet config="main" >
-        <source path="C:\Users\Gebruiker\AndroidStudioProjects\InspectorsGadget\app\libs\tess-two\src\androidTest\res" />
-        <source path="C:\Users\Gebruiker\AndroidStudioProjects\InspectorsGadget\app\libs\tess-two\build\generated\res\rs\test\debug" />
-        <source path="C:\Users\Gebruiker\AndroidStudioProjects\InspectorsGadget\app\libs\tess-two\build\generated\res\generated\test\debug" />
-=======
-        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\build\intermediates\bundles\debug\res" />
-    </dataSet>
-    <dataSet config="main" >
-        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\src\androidTest\res" />
-        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\build\generated\res\rs\test\debug" />
-        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\build\generated\res\generated\test\debug" />
->>>>>>> 0ed1af5d14919c59936db2f4eaad66295cc91aef
+        <source path="C:\Users\Gebruiker\Documents\InspectorsGadget(new)\app\libs\tess-two\src\androidTest\res" />
+        <source path="C:\Users\Gebruiker\Documents\InspectorsGadget(new)\app\libs\tess-two\build\generated\res\rs\test\debug" />
+        <source path="C:\Users\Gebruiker\Documents\InspectorsGadget(new)\app\libs\tess-two\build\generated\res\generated\test\debug" />
     </dataSet>
 
 </merger>
