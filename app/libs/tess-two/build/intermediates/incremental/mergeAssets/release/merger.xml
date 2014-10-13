@@ -2,10 +2,10 @@
 <merger version="2" >
 
     <dataSet config="main" >
-        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\src\main\assets" />
+        <source path="C:\Users\Gebruiker\Documents\InspectorsGadget(new)\app\libs\tess-two\src\main\assets" />
     </dataSet>
     <dataSet config="release" >
-        <source path="C:\Users\Martijn\AndroidStudioProjects\IG (Official)\app\libs\tess-two\src\release\assets" />
+        <source path="C:\Users\Gebruiker\Documents\InspectorsGadget(new)\app\libs\tess-two\src\release\assets" />
     </dataSet>
 
 </merger>
