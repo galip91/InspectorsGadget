@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/take_picture"
         android:title="Take a picture" />
     <item android:id="@+id/record_video"
         android:title="Record a video" />
-    <item android:id="@+id/find_un_1"
-        android:title="Find UN Number 14 28" />
-    <item android:id="@+id/find_un_2"
-        android:title="Find UN Number 31 63" />
-    <item android:id="@+id/find_un_3"
-        android:title="Find UN Number 17 13" />
+
+    <item
+        android:id="@+id/find_un_numbers"
+        android:title="Find UN Number">
+        <menu>
+            <item
+                android:id="@+id/un_14_28"
+                android:title="14 28" />
+            <item
+                android:id="@+id/un_31_63"
+                android:title="31 63" />
+            <item
+                android:id="@+id/un_17_13"
+                android:title="17 13" />
+        </menu>
+    </item>
     <item android:id="@+id/find_missing_containers"
         android:title="Find missing containers" />
 </menu>

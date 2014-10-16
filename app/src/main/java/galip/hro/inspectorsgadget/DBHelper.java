@@ -53,14 +53,14 @@ public class DBHelper extends SQLiteOpenHelper{
         contentValues.put("UnCode", unCode);
         contentValues.put("Description", description);
 
-        db.insert("UnCode", null, contentValues);
+        db.insert("UnCodes", null, contentValues);
         return true;
     }
 
 
     public Cursor getData(String code){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from UnCodes where UnCode="+code+"", null );
+        Cursor res =  db.rawQuery( "select * from UnCodes where UnCode="+code, null );
         return res;
     }
 
@@ -74,7 +74,7 @@ public class DBHelper extends SQLiteOpenHelper{
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("UnCode", unCode);
+        contentValues.put("UnCodes", unCode);
         contentValues.put("Description", description);
 
         db.update("UnCodes", contentValues, "id = ? ", new String[] { Integer.toString(unDd) } );
@@ -108,9 +108,9 @@ public class DBHelper extends SQLiteOpenHelper{
     {
         SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase("InspectorsGadget",null);
 
-        database.execSQL("CREATE TABLE IF NOT EXISTS Users(Username VARCHAR,Password VARCHAR);");
+        database.execSQL("CREATE TABLE IF NOT EXISTS Users(Username VARCHAR(100),Password VARCHAR(20));");
         database.execSQL("INSERT INTO Users VALUES('admin','admin');");
-        database.execSQL("CREATE TABLE IF NOT EXISTS UnCodes(Id INT,UnCode VARCHAR,Description VARCHAR);");
+        database.execSQL("CREATE TABLE IF NOT EXISTS UnCodes(Id INT,UnCode VARCHAR(10),Description VARCHAR(255));");
         database.execSQL("INSERT INTO UnCodes VALUES('1','1428','sodium');");
 
     }

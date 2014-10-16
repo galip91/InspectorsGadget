@@ -67,7 +67,7 @@ public class ResultsActivity extends Activity {
         getWindow().requestFeature(WindowUtils.FEATURE_VOICE_COMMANDS);
         mCardScroller = new CardScrollView(this);
         mCards = new ArrayList<Card>();
-        database.create();
+        //database.create();
 
         UNMap.put("1428", "Sodium");
         UNMap.put("2734", "Amines, liquid, corrosive, flammable, n.o.s. or Polyamines, liquid, corrosive, flammable, n.o.s.");
@@ -141,7 +141,7 @@ public class ResultsActivity extends Activity {
 
         Card card2 = new Card(this);
         String text2 = "Name"  + "\n";
-        text2 += database.getData(code);
+        text2 += database.getData(code).toString();
         card2.setText(text2);
 
 //        Card card3 = new Card(this);

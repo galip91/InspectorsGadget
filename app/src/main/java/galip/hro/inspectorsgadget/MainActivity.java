@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -272,6 +273,13 @@ public class MainActivity extends Activity {
         startActivity(resultsIntent);
     }
 
+    public void findCode(int code){
+        Intent resultsIntent = new Intent(this, ResultsActivity.class);
+        resultsIntent.putExtra(ResultsActivity.UNNumber, String.valueOf(code));
+
+        startActivity(resultsIntent);
+    }
+
     public void  findMissingContainers ()
     {
         Intent resultsIntent = new Intent(this, ContainersActivity.class);
@@ -383,31 +391,40 @@ public class MainActivity extends Activity {
                 case R.id.record_video:
                     recordVideo();
                     break;
-                case R.id.find_un_1:
+                case R.id.un_14_28:
                     findCode("1428");
                     break;
-                case R.id.find_un_2:
+                case R.id.un_31_63:
                     findCode("3163");
                     break;
-                case R.id.find_un_3:
+                case R.id.un_17_13:
                     findCode("1713");
                     break;
                 case R.id.find_missing_containers:
                     findMissingContainers();
                     break;
+                case 14:
+                    findMissingContainers();
+                    break;
             }
+
+            for (int n = 1; n < 10; n ++)
+            {
+                if (item.getItemId() == n)
+                {
+                    findCode(n);
+                }
+            }
+
             return true;
         }
         return super.onMenuItemSelected(featureId, item);
     }
 
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main, menu);
-//
-//
-//        return true;
-//
-//    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
     @Override
     protected void onResume() {
@@ -501,13 +518,15 @@ public class MainActivity extends Activity {
         return false;
     }
 
+
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPreparePanel(int featureId, View view, Menu menu) {
         //menu.clear();
+        SubMenu fileMenu = menu.addSubMenu("Show UN Number");
         for(int n = 0; n < 10; n++) {
             //Menu.add(int, int, int, java.lang.CharSequence)()
-            menu.add(Menu.NONE, n, Menu.NONE, "Name " + n);
+            fileMenu.add(Menu.NONE, n, Menu.NONE, String.valueOf(n));
         }
-        return super.onPrepareOptionsMenu(menu);
+        return super.onPreparePanel(featureId, view, menu);
     }
 }
