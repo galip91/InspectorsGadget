@@ -391,15 +391,15 @@ public class MainActivity extends Activity {
                 case R.id.record_video:
                     recordVideo();
                     break;
-                case R.id.un_14_28:
-                    findCode("1428");
-                    break;
-                case R.id.un_31_63:
-                    findCode("3163");
-                    break;
-                case R.id.un_17_13:
-                    findCode("1713");
-                    break;
+//                case R.id.un_14_28:
+//                    findCode("1428");
+//                    break;
+//                case R.id.un_31_63:
+//                    findCode("3163");
+//                    break;
+//                case R.id.un_17_13:
+//                    findCode("1713");
+//                    break;
                 case R.id.find_missing_containers:
                     findMissingContainers();
                     break;
@@ -408,7 +408,7 @@ public class MainActivity extends Activity {
                     break;
             }
 
-            for (int n = 1; n < 10; n ++)
+            for (int n = 1; n < 3376; n ++)
             {
                 if (item.getItemId() == n)
                 {
@@ -523,7 +523,7 @@ public class MainActivity extends Activity {
     public boolean onPreparePanel(int featureId, View view, Menu menu) {
         //menu.clear();
         SubMenu fileMenu = menu.addSubMenu("Show UN Number");
-        for(int n = 0; n < 10; n++) {
+        for(int n = 0; n < 3376; n++) {
             //Menu.add(int, int, int, java.lang.CharSequence)()
             fileMenu.add(Menu.NONE, n, Menu.NONE, String.valueOf(n));
         }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.glass.app.Card;
@@ -39,28 +40,24 @@ public class ResultsActivity extends Activity {
     private GestureDetector mGestureDetector;
     private CardScrollView mCardScroller;
     private View mView;
-
     private ProgressDialog pDialog;
 
+
+    // Hashmap for ListViewprivate ProgressDialog pDialog;
+
     // URL to get contacts JSON
-    private static String url = "http://api.androidhive.info/contacts/";
+    private static String url = "http://83.87.161.105:18461/default.aspx";
 
     // JSON Node names
-    private static final String TAG_CONTACTS = "contacts";
-    private static final String TAG_ID = "id";
-    private static final String TAG_NAME = "name";
-    private static final String TAG_EMAIL = "email";
-    private static final String TAG_ADDRESS = "address";
-    private static final String TAG_GENDER = "gender";
-    private static final String TAG_PHONE = "phone";
-    private static final String TAG_PHONE_MOBILE = "mobile";
-    private static final String TAG_PHONE_HOME = "home";
-    private static final String TAG_PHONE_OFFICE = "office";
+    private static final String TAG_UNCODE = "UnCode";
+    private static final String TAG_UNNAME = "UnName";
+    private static final String TAG_IMOCODE = "ImoCode";
+
+    private boolean jsonIsEmpty = false;
 
     // contacts JSONArray
     JSONArray contacts = null;
 
-    // Hashmap for ListView
     static ArrayList<HashMap<String, String>> contactList;
 
     @Override
@@ -68,26 +65,17 @@ public class ResultsActivity extends Activity {
         super.onCreate(bundle);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().requestFeature(WindowUtils.FEATURE_VOICE_COMMANDS);
+        if(getIntent().hasExtra(UNNumber)){
+            UNCode = getIntent().getStringExtra(UNNumber);
+        }
+
         mCardScroller = new CardScrollView(this);
         mCards = new ArrayList<Card>();
         contactList = new ArrayList<HashMap<String, String>>();
         mJSONParser = new GetContacts();
         mJSONParser.execute();
 
-        UNMap.put("1428", "Sodium");
-        UNMap.put("2734", "Amines, liquid, corrosive, flammable, n.o.s. or Polyamines, liquid, corrosive, flammable, n.o.s.");
-        UNMap.put("2796", "Battery fluid, acid or Sulfuric acid with not more than 51 percent acid");
-        UNMap.put("3077", "Environmentally hazardous substance, solid, n.o.s. (not including waste)");
-        UNMap.put("3166", "Vehicle, flammable gas powered");
 
-        UNMap.put("3163", "Liquefied gas, n.o.s.");
-        UNMap.put("3174", "Titanium disulphide");
-        UNMap.put("1713", "Zinc cyanide");
-
-
-        if(getIntent().hasExtra(UNNumber)){
-            UNCode = getIntent().getStringExtra(UNNumber);
-        }
 
         mCardScroller.setAdapter(new DeveloperAdapter(mCards));
 
@@ -102,7 +90,6 @@ public class ResultsActivity extends Activity {
         });
 
         setContentView(mCardScroller);
-
     }
 
     @Override
@@ -131,20 +118,34 @@ public class ResultsActivity extends Activity {
     GetContacts mJSONParser;
     private void findCode(String code){
 
-        Card card1 = new Card(this);
 
-        String text1 = "UN number: " + code;
-        card1.setText(text1);
-        card1.setTimestamp("time");
+        if(jsonIsEmpty == true)
+        {
+            Card card1 = new Card(this);
+            String text1 = "UN code bestaat niet";
+            card1.setText(text1);
+        }
 
-        Card card2 = new Card(this);
-        String text2 = "Name"  + "\n";
-        text2 += contactList.get(Integer.parseInt(UNCode)).get("name");
-        //text2 += UNMap.get("1428");
-        card2.setText(text2);
+        else {
+            Card card1 = new Card(this);
+            String text1 = "UN code: " + "\n";
+            text1 += code;
+            card1.setText(text1);
 
-        mCards.add(card1);
-        mCards.add(card2);
+            Card card2 = new Card(this);
+            String text2 = "UN naam: " + "\n";
+            text2 += contactList.get(0).get(TAG_UNNAME);
+            card2.setText(text2);
+
+            Card card3 = new Card(this);
+            String text3 = "IMO code: " + "\n";
+            text3 += contactList.get(0).get(TAG_IMOCODE);
+            card3.setText(text3);
+
+            mCards.add(card1);
+            mCards.add(card2);
+            mCards.add(card2);
+        }
 
         mCardScroller.setSelection(0);
     }
@@ -240,45 +241,53 @@ public class ResultsActivity extends Activity {
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
+            url += "?query=" + UNCode;
             String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+
+            if(jsonStr.equals("[]"))
+            {
+                jsonIsEmpty = true;
+            }
 
             Log.d("Response: ", "> " + jsonStr);
 
-            if (jsonStr != null) {
+            if (jsonStr != null && jsonIsEmpty == false) {
                 try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    JSONArray jsonObj = new JSONArray(jsonStr);
+                    Log.d("JasonObject: ", "> " + "Aangemaakt");
 
-                    // Getting JSON Array node
-                    contacts = jsonObj.getJSONArray(TAG_CONTACTS);
+//
+//                    // Getting JSON Array node
+//                    contacts = jsonObj.getJSONArray(TAG_CONTACTS);
+//
+//                    // looping through All Contacts
+//                   for (int i = 0; i < contacts.length(); i++) {
+                    JSONObject c = jsonObj.getJSONObject(0);
 
-                    // looping through All Contacts
-                    for (int i = 0; i < contacts.length(); i++) {
-                        JSONObject c = contacts.getJSONObject(i);
+                    String UNCODE = c.getString(TAG_UNCODE);
+                    String UNNAME = c.getString(TAG_UNNAME);
+                    String IMOCODE = c.getString(TAG_IMOCODE);
+//                        String address = c.getString(TAG_ADDRESS);
+//                        String gender = c.getString(TAG_GENDER);
+//
+//                        // Phone node is JSON Object
+//                        JSONObject phone = c.getJSONObject(TAG_PHONE);
+//                        String mobile = phone.getString(TAG_PHONE_MOBILE);
+//                        String home = phone.getString(TAG_PHONE_HOME);
+//                        String office = phone.getString(TAG_PHONE_OFFICE);
 
-                        String id = c.getString(TAG_ID);
-                        String name = c.getString(TAG_NAME);
-                        String email = c.getString(TAG_EMAIL);
-                        String address = c.getString(TAG_ADDRESS);
-                        String gender = c.getString(TAG_GENDER);
+                    // tmp hashmap for single contact
+                    HashMap<String, String> contact = new HashMap<String, String>();
 
-                        // Phone node is JSON Object
-                        JSONObject phone = c.getJSONObject(TAG_PHONE);
-                        String mobile = phone.getString(TAG_PHONE_MOBILE);
-                        String home = phone.getString(TAG_PHONE_HOME);
-                        String office = phone.getString(TAG_PHONE_OFFICE);
+                    // adding each child node to HashMap key => value
+                    contact.put(TAG_UNCODE, UNCODE);
+                    contact.put(TAG_UNNAME, UNNAME);
+                    contact.put(TAG_IMOCODE, IMOCODE);
+                    /// contact.put(TAG_PHONE_MOBILE, mobile);
 
-                        // tmp hashmap for single contact
-                        HashMap<String, String> contact = new HashMap<String, String>();
+                    // adding contact to contact list
+                    lstContacts.add(contact);
 
-                        // adding each child node to HashMap key => value
-                        contact.put(TAG_ID, id);
-                        contact.put(TAG_NAME, name);
-                        contact.put(TAG_EMAIL, email);
-                        contact.put(TAG_PHONE_MOBILE, mobile);
-
-                        // adding contact to contact list
-                        lstContacts.add(contact);
-                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -301,82 +310,3 @@ public class ResultsActivity extends Activity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public void getJson()
-//    {
-//        // Creating service handler class instance
-//        ServiceHandler sh = new ServiceHandler();
-//
-//        // Making a request to url and getting response
-//        String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-//
-//        Log.d("Response: ", "> " + jsonStr);
-//
-//        if (jsonStr != null) {
-//            try {
-//                JSONObject jsonObj = new JSONObject(jsonStr);
-//
-//                // Getting JSON Array node
-//                contacts = jsonObj.getJSONArray(TAG_CONTACTS);
-//
-//                // looping through All Contacts
-//                for (int i = 0; i < contacts.length(); i++) {
-//                    JSONObject c = contacts.getJSONObject(i);
-//
-//                    String id = c.getString(TAG_ID);
-//                    String name = c.getString(TAG_NAME);
-//                    String email = c.getString(TAG_EMAIL);
-//                    String address = c.getString(TAG_ADDRESS);
-//                    String gender = c.getString(TAG_GENDER);
-//
-//                    // Phone node is JSON Object
-//                    JSONObject phone = c.getJSONObject(TAG_PHONE);
-//                    String mobile = phone.getString(TAG_PHONE_MOBILE);
-//                    String home = phone.getString(TAG_PHONE_HOME);
-//                    String office = phone.getString(TAG_PHONE_OFFICE);
-//
-//                    // tmp hashmap for single contact
-//                    HashMap<String, String> contact = new HashMap<String, String>();
-//
-//                    // adding each child node to HashMap key => value
-//                    contact.put(TAG_ID, id);
-//                    contact.put(TAG_NAME, name);
-//                    contact.put(TAG_EMAIL, email);
-//                    contact.put(TAG_PHONE_MOBILE, mobile);
-//
-//                    // adding contact to contact list
-//                    contactList.add(contact);
-//                }
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        } else
-//        {
-//            Log.e("ServiceHandler", "Couldn't get any data from the url");
-
